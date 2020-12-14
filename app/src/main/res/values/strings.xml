@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SBBS</string>
+    <string name="title_activity_splash_screen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="copyrightText">DevSoft 2020</string>
+    <string name="app_name_hindi">श्री बालाजी बचत समिति</string>
+    <string name="name_english">Shree Balaji Bachat Samiti</string>
+    <string name="lblGetExcelData">Get Excel Data</string>
+    <string name="lbl_hanuman_logo">Hanuman Logo</string>
+    <string name="lblGetExcelDataActivity">ExcelProject</string>
+    <string name="lbl_send_pay_reminder">Send Pay Reminder</string>
+</resources>
