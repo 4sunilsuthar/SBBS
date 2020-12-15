@@ -46,15 +46,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:padding="2dp" />
+                        android:padding="2dp"
+                        tools:text="999999999999"
+                        />
 
                     <TextView
                         android:id="@+id/sms_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:padding="2dp" />
-
+                        android:padding="2dp"
+                        android:textStyle="bold"
+                        tools:text="This is a text message body"/>
 
                 </LinearLayout>
             </LinearLayout>

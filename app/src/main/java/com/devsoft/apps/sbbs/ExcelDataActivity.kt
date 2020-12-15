@@ -1,12 +1,17 @@
 package com.devsoft.apps.sbbs
 
 import android.Manifest
+import android.R.attr.phoneNumber
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsManager
+import android.telephony.SubscriptionManager
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class ExcelDataActivity : AppCompatActivity() {
 
     //  Logging and Debugging TAG
@@ -26,32 +32,47 @@ class ExcelDataActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+//    private lateinit var smsDataList : List<SMS>
+    private lateinit var smsDataList : List<SMS>
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_excel_data2)
+//        smsDataList = mutableListOf()
+        smsDataList = mutableListOf<SMS>()
+//      initialize the Recycler View
+        recyclerView = findViewById(R.id.sms_list_recycler_view)
         viewManager = LinearLayoutManager(this)
-//        viewAdapter = SmsAdapter(myDataset)
-
-        val btnGetExcel: Button = findViewById(R.id.btnGetExcel)
-        btnGetExcel.setOnClickListener {
+        recyclerView.layoutManager = viewManager
+        try {
+//            here call the function to get data from the json API
+            getSMSData()
+        } catch (e: Exception) {
             Toast.makeText(
                 applicationContext,
-                "Fetching data from Server",
+                "Something went Wrong with Server... Please Try Again",
                 Toast.LENGTH_SHORT
             ).show()
-
-            try {
-//            here call the function to get data from the json API
-                getSMSData()
-            } catch (e: Exception) {
+        }
+        // send SMS on the Click of the Button
+        val btnGetExcel: Button = findViewById(R.id.btnGetExcel)
+        btnGetExcel.setOnClickListener {
+            // sendSMS(response.body())
+            if(smsDataList.isNotEmpty()) {
+                sendSMS(smsDataList)
                 Toast.makeText(
                     applicationContext,
-                    "Something went Wrong with Server... Please Try Again",
+                    "Sending Pay Reminders via SMS",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                Toast.makeText(
+                    applicationContext,
+                    "No Data Available to Send Text",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
     }
 
@@ -64,10 +85,15 @@ class ExcelDataActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<SMS>>, response: Response<List<SMS>>) {
                 // get the list of SMSs to be sent now send this list to populate the SMS from function
                 // call the function & send SMS
-
-                viewAdapter = SmsAdapter(this@ExcelDataActivity, response.body())
+                Log.e(
+                    mTAG,
+                    "Fetching SMS Data from Sheet, Data is: ${response.body().toString()}"
+                )
+                smsDataList = response.body()!!
+                viewAdapter = SmsAdapter(this@ExcelDataActivity, smsDataList)
                 recyclerView.adapter = viewAdapter
-                //sendSMS(response.body())
+                //sendSMS(response.body()) Temp Call Stopped
+
             }
 
             override fun onFailure(call: Call<List<SMS>>, t: Throwable) {
@@ -105,11 +131,34 @@ class ExcelDataActivity : AppCompatActivity() {
          */
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    @SuppressLint("NewApi")
     private fun sendSMS(smsList: List<SMS>?) {
         // first check for the sms sending permission
         setupPermissions()
+
+        val simCardList: ArrayList<Int> = ArrayList()
+        val subscriptionManager: SubscriptionManager = SubscriptionManager.from(this)
+        val subscriptionInfoList = subscriptionManager.activeSubscriptionInfoList
+        for (subscriptionInfo in subscriptionInfoList) {
+            val subscriptionId = subscriptionInfo.subscriptionId
+            simCardList.add(subscriptionId)
+        }
+
+        val smsToSendFrom = simCardList[0] //assign your desired sim to send sms, or user selected choice
+
+        /*SmsManager.getSmsManagerForSubscriptionId(smsToSendFrom)
+            .sendTextMessage(
+                phoneNumber,
+                null,
+                msg,
+                sentPI,
+                deliveredPI
+            ) //use your phone number, message and pending intents*/
+
         // get single records and send SMS
-        val smsManager: SmsManager = SmsManager.getDefault()
+//        val smsManager: SmsManager = SmsManager.getDefault()
+        val smsManager: SmsManager = SmsManager.getSmsManagerForSubscriptionId(smsToSendFrom)
         for (member in smsList!!) {
             Log.e(
                 mTAG,

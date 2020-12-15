@@ -2,7 +2,6 @@ package com.devsoft.apps.sbbs.utils
 
 import com.devsoft.apps.sbbs.api.API
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
 import retrofit2.Retrofit.Builder
 import retrofit2.converter.gson.GsonConverterFactory
 

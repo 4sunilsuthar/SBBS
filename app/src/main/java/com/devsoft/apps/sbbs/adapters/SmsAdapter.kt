@@ -9,7 +9,7 @@ import com.devsoft.apps.sbbs.ExcelDataActivity
 import com.devsoft.apps.sbbs.R
 import com.devsoft.apps.sbbs.models.SMS
 
-class SmsAdapter(private val smsDataset: ExcelDataActivity, val context: List<SMS>?) :
+class SmsAdapter(private val context: ExcelDataActivity, private val smsDataSet: List<SMS>?) :
     RecyclerView.Adapter<SmsAdapter.SmsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SmsViewHolder {
@@ -19,14 +19,14 @@ class SmsAdapter(private val smsDataset: ExcelDataActivity, val context: List<SM
     }
 
     override fun onBindViewHolder(holder: SmsViewHolder, position: Int) {
-        val smsCard = smsDataset[position]
+        val smsCard = smsDataSet!![position]
         holder.smsName.text = smsCard.rowNo // change to Name
         holder.smsNumber.text = smsCard.mobileNo
         holder.smsText.text = smsCard.smsText
     }
 
     override fun getItemCount(): Int {
-        return smsDataset.size
+        return smsDataSet!!.size
     }
 
     class SmsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
