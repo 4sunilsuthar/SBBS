@@ -3,11 +3,16 @@
     <string name="title_activity_splash_screen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="copyrightText">DevSoft 2020</string>
-    <string name="app_name_hindi">श्री बालाजी बचत समिति</string>
+    <string name="copyrightText">© @ DevSoft 2020</string>
+    <string name="app_name_hindi">श्री बालाजी बचत सेवा समिति</string>
     <string name="name_english">Shree Balaji Bachat Samiti</string>
     <string name="lblGetExcelData">Get Excel Data</string>
     <string name="lbl_hanuman_logo">Hanuman Logo</string>
     <string name="lblGetExcelDataActivity">ExcelProject</string>
     <string name="lbl_send_pay_reminder">Send Pay Reminder</string>
+    <string name="label_code_no">कोड नं:- </string>
+    <string name="label_mobile_no">मोबाइल नं:- </string>
+    <string name="label_name_text">नाम:- </string>
+    <string name="label_amount">राशि:- </string>
+    <string name="lbl_address">श्री बालाजी मन्दिर, किश्नावतों की खेड़ी, भीलवाड़ा</string>
 </resources>

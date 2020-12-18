@@ -85,15 +85,9 @@ class ExcelDataActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<SMS>>, response: Response<List<SMS>>) {
                 // get the list of SMSs to be sent now send this list to populate the SMS from function
                 // call the function & send SMS
-                Log.e(
-                    mTAG,
-                    "Fetching SMS Data from Sheet, Data is: ${response.body().toString()}"
-                )
                 smsDataList = response.body()!!
                 viewAdapter = SmsAdapter(this@ExcelDataActivity, smsDataList)
                 recyclerView.adapter = viewAdapter
-                //sendSMS(response.body()) Temp Call Stopped
-
             }
 
             override fun onFailure(call: Call<List<SMS>>, t: Throwable) {

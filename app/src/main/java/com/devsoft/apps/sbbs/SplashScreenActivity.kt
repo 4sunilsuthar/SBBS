@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.RelativeLayout
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import java.util.concurrent.TimeUnit
 
@@ -22,15 +22,13 @@ class SplashScreenActivity : AppCompatActivity() {
         val imgCompanyLogo: ImageView = findViewById(R.id.imgCompanyLogo)
         val animation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
         val outAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out)
-        val relativeLayout: RelativeLayout = findViewById(R.id.relative_layout_splash)
-
-        // start the animation here
+        val linearLayout: LinearLayout = findViewById(R.id.linear_layout_splash)
 
         // start the animation here
         mSplashThread = object : Thread() {
             override fun run() {
                 try {
-                    relativeLayout.startAnimation(outAnimation)
+                    linearLayout.startAnimation(outAnimation)
                     imgCompanyLogo.startAnimation(animation)
                     synchronized(this) {
                         TimeUnit.MILLISECONDS.sleep(3000L)

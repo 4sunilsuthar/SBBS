@@ -1,5 +1,6 @@
 package com.devsoft.apps.sbbs.adapters
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +21,10 @@ class SmsAdapter(private val context: ExcelDataActivity, private val smsDataSet:
 
     override fun onBindViewHolder(holder: SmsViewHolder, position: Int) {
         val smsCard = smsDataSet!![position]
-        holder.smsName.text = smsCard.rowNo // change to Name
+        holder.smsCodeNo.text = smsCard.codeNo
+        holder.smsName.text = smsCard.name
         holder.smsNumber.text = smsCard.mobileNo
+        holder.smsAmount.text = smsCard.amount
         holder.smsText.text = smsCard.smsText
     }
 
@@ -30,8 +33,10 @@ class SmsAdapter(private val context: ExcelDataActivity, private val smsDataSet:
     }
 
     class SmsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val smsCodeNo: TextView = itemView.findViewById(R.id.sms_code_no)
         val smsName: TextView = itemView.findViewById(R.id.sms_name)
         val smsNumber: TextView = itemView.findViewById(R.id.sms_mobile_number)
         val smsText: TextView = itemView.findViewById(R.id.sms_text)
+        val smsAmount: TextView = itemView.findViewById(R.id.sms_amount)
     }
 }

@@ -9,19 +9,29 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/name_english"
+        android:padding="16dp"
+        android:text="@string/app_name_hindi"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="16pt"
+        android:textColor="@color/colorSaffron"
+        android:textSize="30sp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/lbl_address"
+        android:textAlignment="center"
+        android:textColor="@color/color_blue_matte"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="9"
         android:contentDescription="@string/lbl_hanuman_logo"
         app:srcCompat="@drawable/logo_hanuman" />
 
@@ -30,8 +40,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/colorAccent"
+        android:background="@color/colorSaffron"
+        android:padding="6dp"
         android:text="@string/lblGetExcelDataActivity"
-        android:textColor="@color/colorSaffron" />
+        android:textColor="@color/color_blue_matte"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
